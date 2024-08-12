@@ -7,6 +7,9 @@ from alembic import context
 
 from app.database import Base
 from app.hotels.models import Hotel
+from app.bookings.models import Booking
+from app.users.models import User
+from app.rooms.models import Room
 from app.config import DevelopmentConfig
 
 # this is the Alembic Config object, which provides
