@@ -1,21 +1,20 @@
 from fastapi import APIRouter
-from app.database import async_session
-from app.bookings import Boo
 
+from sqlalchemy import select
+
+from app.bookings.dao import BookingDAO
+from app.bookings.schemas import BookingScheme
 
 router = APIRouter(
     prefix="/bookings",
     tags=["Бронирования"],
 )
 
-
-@router.get("")
+@router.get("", response_model=list[BookingScheme])
 async def get_bookings():
-    async with async_session() as session:
-        # query = select(Bookings)
-        pass
+    return await BookingDAO.find_all()
 
 
-@router.get("/{booking_id}")
+@router.get("/{booking_id}", response_model=list[BookingScheme])
 async def get_bookings_by_id(booking_id: int):
-    pass
+    return await BookingDAO.find_by_parameters(id=booking_id)
