@@ -7,7 +7,7 @@ class BaseException(HTTPException):
     status_code = None
     detail = None
 
-    def __init__(self) -> HTTPException:
+    def __init__(self):
         super().__init__(status_code=self.status_code, detail=self.detail)
 
 
