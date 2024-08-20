@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from sqlalchemy import select
 
 from app.bookings.dao import BookingDAO
-from app.bookings.schemas import BookingScheme
+from app.bookings.schemes import BookingScheme
 
 router = APIRouter(
     prefix="/bookings",

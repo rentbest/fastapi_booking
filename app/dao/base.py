@@ -17,7 +17,10 @@ class BaseDAO:
     @classmethod
     async def find_by_parameters(cls, **params):
         async with async_session() as session:
-            query = select(cls.model).filter_by(**params)
+            if params:
+                query = select(cls.model).filter_by(**params)
+            else:
+                query = select(cls.model)
             result = await session.execute(query)
             return result.scalars().all()
         
