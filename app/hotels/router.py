@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Form
 
 from app.hotels.schemes import HotelScheme
 from app.hotels.dao import HotelsDAO
@@ -25,3 +25,11 @@ async def get_hotel_by_id(hotel_id: int):
     if not hotel:
         raise exc.HotelNotFound
     return hotel[0]
+
+
+@router.post("", response_model=HotelScheme)
+async def add_hotel(hotel_data: HotelScheme):
+    hotel = await HotelsDAO.add(**hotel_data.dict())
+    if not hotel:
+        raise exc.HotelAddBadRequest
+    

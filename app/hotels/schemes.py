@@ -1,13 +1,12 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class HotelScheme(BaseModel):
-    id: int
-    name: str
-    location: str
-    services: list[str]
-    rooms_quantity: int
-    image_id: int
+    name: str = Field(example=1)
+    location: str = Field(example=1)
+    services: list[str] = Field(example=['service1', 'service2'])
+    rooms_quantity: int = Field(example=1)
+    image_id: int = Field(example=1)
     
     class Config:
         from_attributes = True
