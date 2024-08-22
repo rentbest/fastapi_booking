@@ -15,6 +15,17 @@ class RoomNotFound(BaseException):
     status_code = status.HTTP_404_NOT_FOUND
     detail = "Room not found"
 
+
 class RoomsNotFound(BaseException):
     status_code = status.HTTP_404_NOT_FOUND
     detail = "Rooms not found"
+
+
+class RoomAddBadRequest(BaseException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    detail = "Bad request for adding Room"
+
+
+class RoomAddBadRequestHotel(BaseException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    detail = "Bad request for adding Room - Hotel does not exist"
