@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
 
-from app.rooms.schemes import RoomSchemeRequest, RoomSchemeResponse
+from app.rooms.schemes import RoomRequestScheme, RoomResponseScheme
 from app.rooms.dao import RoomsDAO
 import app.rooms.exceptions as exc
 from app.hotels.dao import HotelsDAO
@@ -11,7 +11,7 @@ router = APIRouter(
 )
 
 
-@router.get("", response_model=list[RoomSchemeResponse])
+@router.get("", response_model=list[RoomResponseScheme])
 async def get_rooms():
     rooms = await RoomsDAO.read_all()
     if not rooms:
@@ -19,7 +19,7 @@ async def get_rooms():
     return rooms
 
 
-@router.get("/{room_id}", response_model=RoomSchemeResponse)
+@router.get("/{room_id}", response_model=RoomResponseScheme)
 async def get_room_by_id(room_id: int):
     room = await RoomsDAO.read_by_parameters(id=room_id)
     if not room:
@@ -27,8 +27,8 @@ async def get_room_by_id(room_id: int):
     return room[0]
 
 
-@router.post("", response_model=RoomSchemeResponse)
-async def add_room(room_data: RoomSchemeRequest):
+@router.post("", response_model=RoomResponseScheme)
+async def add_room(room_data: RoomRequestScheme):
     hotel = await HotelsDAO.read_by_parameters(id=room_data.hotel_id)
     if not hotel:
         raise exc.RoomAddBadRequestHotel
@@ -38,8 +38,8 @@ async def add_room(room_data: RoomSchemeRequest):
     return room
     
 
-@router.put("/{room_id}", response_model=RoomSchemeResponse)
-async def update_room(room_id: int, room_data: RoomSchemeRequest):
+@router.put("/{room_id}", response_model=RoomResponseScheme)
+async def update_room(room_id: int, room_data: RoomRequestScheme):
     room = await RoomsDAO.read_by_parameters(id=room_id)
     if not room:
         raise exc.RoomNotFound

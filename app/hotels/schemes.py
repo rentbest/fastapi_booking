@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 
 
-class HotelSchemeRequest(BaseModel):
+class HotelRequestScheme(BaseModel):
     name: str = Field(example="hotel name")
     location: str = Field(example="hotel location")
     services: list[str] = Field(example=['service1', 'service2'])
@@ -10,7 +10,7 @@ class HotelSchemeRequest(BaseModel):
 
 
     
-class HotelSchemeResponse(BaseModel):
+class HotelResponseScheme(BaseModel):
     id: int
     name: str
     location: str
