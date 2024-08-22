@@ -15,9 +15,11 @@ class HotelNotFound(BaseException):
     status_code = status.HTTP_404_NOT_FOUND
     detail = "Hotel not found"
 
+
 class HotelsNotFound(BaseException):
     status_code = status.HTTP_404_NOT_FOUND
     detail = "Hotels not found"
+
 
 class HotelAddBadRequest(BaseException):
     status_code = status.HTTP_400_BAD_REQUEST

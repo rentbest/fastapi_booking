@@ -13,16 +13,16 @@ router = APIRouter(
 
 @router.post("/register")
 async def register_user(user_data: UserAuthSchema):
-    is_user_exists = await UserDAO.find_by_parameters(email=user_data.email)
+    is_user_exists = await UserDAO.read_by_parameters(email=user_data.email)
     if is_user_exists:
         raise HTTPException(status_code=409)
     hashed_password = get_password_hash(user_data.password)
-    await UserDAO.add(email=user_data.email, hashed_password=hashed_password)
+    await UserDAO.create(email=user_data.email, hashed_password=hashed_password)
 
 
 @router.post("/login")
 async def login_user(user_data: UserAuthSchema):
-    user = await UserDAO.find_by_parameters(email=user_data.email)
+    user = await UserDAO.read_by_parameters(email=user_data.email)
     if not user:
         raise HTTPException(status_code=401)
     is_password_valid = verify_password(user_data.password, user.password)
