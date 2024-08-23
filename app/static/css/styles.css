@@ -1,0 +1,79 @@
+/* styles.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;  /* Отступ для всей страницы */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hotel {
+    display: flex;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    align-items: center;  /* Выравнивание текста по линии */
+    transition: box-shadow 0.3s ease; /* Плавная анимация при наведении */
+    text-decoration: none;  /* Убираем подчеркивание у всего блока */
+    color: inherit;  /* Сохраняем стандартный цвет текста */
+}
+
+.hotel img {
+    width: 300px;  /* Одинаковый размер для всех изображений */
+    height: 200px;  /* Фиксированная высота для изображений */
+    object-fit: cover;  /* Обрезка изображений по размеру блока */
+    border-radius: 8px 0 0 8px;
+}
+
+.hotel-details {
+    padding: 20px;
+    flex-grow: 1;  /* Растягивание блока с текстом на всю доступную ширину */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hotel-details h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.hotel-details h4 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #777;
+}
+
+.hotel-details p {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+}
+
+.hotel:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Подсветка всего блока при наведении */
+}
+
+.hotel a {
+    text-decoration: none;  /* Убираем подчеркивание у текста в блоке */
+    color: inherit;  /* Сохраняем стандартный цвет текста */
+}
+
+.hotel a:hover {
+    text-decoration: none;  /* Убираем подчеркивание у текста при наведении */
+    color: inherit;  /* Отключаем изменение цвета текста при наведении */
+}
+
+.hotel:hover {
+    text-decoration: none;  /* Отключаем подчеркивание у всего блока при наведении */
+    color: inherit;  /* Отключаем изменение цвета текста в блоке при наведении */
+}

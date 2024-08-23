@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сайт для бронирования</title>
+    <title>Детали отеля</title>
     <link rel="stylesheet" href="{{ url_for('static', path='css/styles.css') }}">
 </head>
-
 <body>
     <div class="container">
-        {% for hotel in hotels %}
-        <a href="{{ url_for('get_hotel_detail_page', hotel_id=hotel.id) }}" class="hotel">
-            <img src="{{ url_for('static', path='images/' + hotel.image_id|string + '.webp') }}" alt="Фото отеля">
+        <div class="hotel">
+            <img src="{{ url_for('static', path='images/' + hotel.image_id|string + '.webp') }}"
+            alt="Фото отеля">
             <div class="hotel-details">
-                <h1>{{hotel.name}}</h1>
-                <h4>{{hotel.location}}</h4>
+                <h1>{{ hotel.name }}</h1>
+                <h4>{{ hotel.location }}</h4>
                 <p>Услуги: {{ hotel.services | join(', ') }}</p>
                 <p>Количество номеров: {{ hotel.rooms_quantity }}</p>
+                <a href="{{ url_for('get_hotels_page') }}">Назад к списку отелей</a>
             </div>
-        </a>
-        {% endfor %}
+        </div>
     </div>
 </body>
-
 </html>
