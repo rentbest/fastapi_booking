@@ -4,6 +4,9 @@ from app.hotels.schemes import HotelRequestScheme, HotelResponseScheme
 from app.hotels.dao import HotelsDAO
 import app.hotels.exceptions as exc
 
+from fastapi_cache.decorator import cache
+from fastapi_cache import FastAPICache
+
 
 router = APIRouter(
     prefix="/hotels",
@@ -12,6 +15,7 @@ router = APIRouter(
 
 
 @router.get("", response_model=list[HotelResponseScheme])
+@cache(expire=30, namespace="hotels")
 async def get_hotels():
     hotels = await HotelsDAO.read_all()
     if not hotels:
@@ -20,6 +24,7 @@ async def get_hotels():
 
 
 @router.get("/{hotel_id}", response_model=HotelResponseScheme)
+@cache(expire=30, namespace="hotels")
 async def get_hotel_by_id(hotel_id: int):
     hotel = await HotelsDAO.read_by_parameters(id=hotel_id)
     if not hotel:
@@ -32,6 +37,9 @@ async def add_hotel(hotel_data: HotelRequestScheme):
     hotel = await HotelsDAO.create(**hotel_data.model_dump())
     if not hotel:
         raise exc.HotelAddBadRequest
+    
+    await FastAPICache.clear(namespace="hotels")
+
     return hotel
     
 
@@ -41,6 +49,9 @@ async def update_hotel(hotel_id: int, hotel_data: HotelRequestScheme):
     if not hotel:
         raise exc.HotelNotFound
     updated_hotel = await HotelsDAO.update(id=hotel_id, **hotel_data.model_dump())
+
+    await FastAPICache.clear(namespace="hotels")
+
     return updated_hotel
 
 
@@ -50,4 +61,7 @@ async def delete_hotel(hotel_id: int):
     if not hotel:
         raise exc.HotelNotFound
     await HotelsDAO.delete(hotel_id)
+
+    await FastAPICache.clear(namespace="hotels")
+
     return None

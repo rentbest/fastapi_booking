@@ -9,7 +9,9 @@ from app.rooms.router import router as rooms_router
 from app.pages.router import router as pages_router
 from app.images.router import router as images_router
 
-app = FastAPI()
+from app.cache import lifespan
+
+app = FastAPI(lifespan=lifespan)
 
 app.mount("/static", StaticFiles(directory="app/static"), "static")
 
