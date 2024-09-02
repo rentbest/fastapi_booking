@@ -10,13 +10,13 @@ from app.hotels.models import Hotel
 from app.bookings.models import Booking
 from app.users.models import User
 from app.rooms.models import Room
-from app.config import DevelopmentConfig
+from app.config import settings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 
-config.set_main_option("sqlalchemy.url", f"{DevelopmentConfig().DATABASE_URL}?async_fallback=True")
+config.set_main_option("sqlalchemy.url", f"{settings.DATABASE_URL}?async_fallback=True")
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

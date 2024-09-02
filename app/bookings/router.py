@@ -5,6 +5,7 @@ from app.bookings.dao import BookingsDAO
 import app.bookings.exceptions as exc
 from app.rooms.dao import RoomsDAO
 from app.users.dao import UsersDAO
+from app.tasks.tasks import send_booking_confirmation_email
 
 router = APIRouter(
     prefix="/bookings",
@@ -39,6 +40,10 @@ async def add_booking(booking_data: BookingRequestScheme):
     booking = await BookingsDAO.create(**booking_data.model_dump())
     if not booking:
         raise exc.BookingAddBadRequest
+    
+    booking_dict = {key: value for key, value in booking.__dict__.items() if not key.startswith('_')}
+    # ВРЕМЕННАЯ ЗАГЛУШКА email_to !!!!!!!!!!!!!!!!!!!!
+    send_booking_confirmation_email.delay(booking_dict, email_to="rinat.davleev.97@gmail.com")
     return booking
     
 
