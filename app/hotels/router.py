@@ -37,11 +37,11 @@ async def add_hotel(hotel_data: HotelRequestScheme):
     hotel = await HotelsDAO.create(**hotel_data.model_dump())
     if not hotel:
         raise exc.HotelAddBadRequest
-    
+
     await FastAPICache.clear(namespace="hotels")
 
     return hotel
-    
+
 
 @router.put("/{hotel_id}", response_model=HotelResponseScheme)
 async def update_hotel(hotel_id: int, hotel_data: HotelRequestScheme):

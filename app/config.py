@@ -4,6 +4,7 @@ import os
 
 load_dotenv()
 
+
 class Config:
     DEBUG = True
     TESTING = False
@@ -25,7 +26,7 @@ class Config:
     @property
     def DATABASE_URL(self):
         return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
-    
+
 
 class DevelopmentConfig(Config):
     DEBUG = True

@@ -19,8 +19,7 @@ async def get_hotels_page(
     hotels=Depends(get_hotels),
 ):
     return templates.TemplateResponse(
-        name="hotels.html",
-        context={"request": request, "hotels": hotels}
+        name="hotels.html", context={"request": request, "hotels": hotels}
     )
 
 
@@ -33,6 +32,5 @@ async def get_hotel_detail_page(
     if not hotel:
         raise exc.HotelNotFound
     return templates.TemplateResponse(
-        name="hotel_detail.html",
-        context={"request": request, "hotel": hotel}
+        name="hotel_detail.html", context={"request": request, "hotel": hotel}
     )

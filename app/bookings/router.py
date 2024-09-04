@@ -40,12 +40,16 @@ async def add_booking(booking_data: BookingRequestScheme):
     booking = await BookingsDAO.create(**booking_data.model_dump())
     if not booking:
         raise exc.BookingAddBadRequest
-    
-    booking_dict = {key: value for key, value in booking.__dict__.items() if not key.startswith('_')}
+
+    booking_dict = {
+        key: value for key, value in booking.__dict__.items() if not key.startswith("_")
+    }
     # ВРЕМЕННАЯ ЗАГЛУШКА email_to !!!!!!!!!!!!!!!!!!!!
-    send_booking_confirmation_email.delay(booking_dict, email_to="rinat.davleev.97@gmail.com")
+    send_booking_confirmation_email.delay(
+        booking_dict, email_to="rinat.davleev.97@gmail.com"
+    )
     return booking
-    
+
 
 @router.put("/{booking_id}", response_model=BookingResponseScheme)
 async def update_booking(booking_id: int, booking_data: BookingRequestScheme):
@@ -58,7 +62,9 @@ async def update_booking(booking_id: int, booking_data: BookingRequestScheme):
     booking = await BookingsDAO.read_by_parameters(id=booking_id)
     if not booking:
         raise exc.BookingNotFound
-    updated_booking = await BookingsDAO.update(id=booking_id, **booking_data.model_dump())
+    updated_booking = await BookingsDAO.update(
+        id=booking_id, **booking_data.model_dump()
+    )
     return updated_booking
 
 

@@ -36,7 +36,7 @@ async def add_room(room_data: RoomRequestScheme):
     if not room:
         raise exc.RoomAddBadRequest
     return room
-    
+
 
 @router.put("/{room_id}", response_model=RoomResponseScheme)
 async def update_room(room_id: int, room_data: RoomRequestScheme):

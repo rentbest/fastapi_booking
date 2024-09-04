@@ -29,7 +29,7 @@ async def login_user(user_data: UserAuthSchema):
     is_password_valid = verify_password(user_data.password, user.password)
     if not is_password_valid:
         raise HTTPException(status_code=401)
-    
+
 
 @router.get("/{user_id}")
 async def get_user_by_id(user_id: int):
