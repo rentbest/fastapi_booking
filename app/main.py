@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
+from sqladmin import Admin
+from app.admin.views import UserAdmin, HotelAdmin
+
+from app.database import engine
+
 from app.bookings.router import router as bookings_router
 from app.users.router import router as users_router
 from app.hotels.router import router as hotels_router
@@ -21,3 +26,9 @@ app.include_router(hotels_router)
 app.include_router(rooms_router)
 app.include_router(pages_router)
 app.include_router(images_router)
+
+
+admin = Admin(app, engine)
+
+admin.add_view(UserAdmin)
+admin.add_view(HotelAdmin)
