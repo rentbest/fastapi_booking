@@ -1,18 +1,6 @@
 # About
 This is a backend project for a hotel booking system built with **FastAPI**, **PostgreSQL**, **Redis** for caching, and **Celery** for background task processing. It uses **Pydantic** for data validation, **SQLAlchemy** for ORM, **Jinja** for templating, **SQLAdmin** for admin interface, **Alembic** for database migrations, and **Flower** for monitoring Celery tasks.
 
-# Frontend
-![Frontend](images/frontend.png)
-
-# Routes (Swagger)
-![Swagger](images/swagger.gif)
-
-# Admin Panel
-![Admin Panel](images/admin_panel.png)
-
-# Task Panel
-![Flower](images/flower.png)
-
 # Project structure
 
 ```
@@ -42,6 +30,18 @@ This is a backend project for a hotel booking system built with **FastAPI**, **P
 * Alembic: Used for database migrations to manage schema changes over time.
 * Jinja: Templating engine used for rendering HTML templates.
 * SQLAdmin: Provides an admin interface for managing application data through the web.
+
+# Frontend
+![Frontend](images/frontend.png)
+
+# Routes (Swagger)
+![Swagger](images/swagger.gif)
+
+# Admin Panel
+![Admin Panel](images/admin_panel.png)
+
+# Task Panel
+![Flower](images/flower.png)
 
 # Installation
 
